@@ -1,0 +1,28 @@
+{
+  "name": "portfolio",
+  "version": "1.0.0",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "author": "Krystian Migura",
+  "license": "ISC",
+  "dependencies": {
+    "@angular/cli": "^8.2.1",
+    "angular": "^1.7.8",
+    "body-parser": "^1.19.0",
+    "bottlejs": "^1.7.2",
+    "express": "^4.17.1",
+    "fs": "0.0.1-security",
+    "grunt": "^1.0.4",
+    "grunt-contrib-uglify": "^4.0.1",
+    "import-css": "^3.0.0",
+    "mongodb": "^3.3.0-beta2",
+    "request": "^2.88.0",
+    "rivets": "^0.9.6",
+    "window": "^4.2.6"
+  },
+  "devDependencies": {},
+  "description": ""
+}

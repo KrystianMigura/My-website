@@ -1,0 +1,4 @@
+function sadomaso(){
+
+    return 'asdf'
+}

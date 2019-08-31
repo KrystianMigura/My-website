@@ -1,0 +1,6 @@
+{
+  "mongoDb": {
+    "address": "localhost:27017",
+    "name": "Users"
+  }
+}
