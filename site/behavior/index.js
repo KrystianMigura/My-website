@@ -1,8 +1,11 @@
 
-ImplementServices()
+// ImplementServices()
 
 
 var uiModel = {
+    register: function(){
+        window.location.assign("~")
+    },
     Send: function () {
         var Value = {
             "name": document.getElementById("Name").value,

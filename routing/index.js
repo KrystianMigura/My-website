@@ -30,7 +30,7 @@ app.use(bodyParser.json({ limit: '128mb'}));
         })
 
         //get
-        app.get('/', function(req, res){ res.sendFile( configFile+'/index.html')})
+        app.get("/", function(req, res){ res.sendFile( configFile+'/index.html')})
         app.get("/sys-ui", function(req, res){res.sendFile(configFile+"/admin/pages/index.html")})
         app.get("/dashboard",function(req, res){res.sendFile(configFile+"/admin/pages/dashboard.html")})
         app.get("/users",function(req, res){res.sendFile(configFile+"/admin/pages/users.html")})
@@ -40,7 +40,7 @@ app.use(bodyParser.json({ limit: '128mb'}));
 
         app.post("/addUser", require(configFile+'/configuration/database').addUser);
 
-
+        app.get("~link", function(req, res){console.log(req.body)})
 
 
         //error
