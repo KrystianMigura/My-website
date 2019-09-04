@@ -40,7 +40,7 @@ app.use(bodyParser.json({ limit: '128mb'}));
 
         app.post("/addUser", require(configFile+'/configuration/database').addUser);
 
-        app.get("~link", function(req, res){console.log(req.body)})
+        app.get("/register", function(req, res){res.sendFile(configFile+"/site/pages/register.html")})
 
 
         //error

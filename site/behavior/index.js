@@ -4,7 +4,7 @@
 
 var uiModel = {
     register: function(){
-        window.location.assign("~")
+        window.location.assign("/register")
     },
     Send: function () {
         var Value = {
