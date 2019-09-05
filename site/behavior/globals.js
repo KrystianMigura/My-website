@@ -22,7 +22,6 @@
     * */
     globals.HttpRequestJson= function (url, body){
         return new Promise(function(resolve, reject){
-
             var xhr = new XMLHttpRequest();
             xhr.open("POST", url, true);
             xhr.setRequestHeader("Content-Type", "application/json");
