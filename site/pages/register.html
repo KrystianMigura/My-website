@@ -4,6 +4,7 @@
 <html>
 <div id="allPages" class="allPages">
 
+
     <div class="topMenu">
         <span class="login">Login</span>
         <span class="register" rv-on-click="register">Register</span>
@@ -22,6 +23,17 @@
     </div>
 
     <div class="body">
+
+        <div id="loader" class="loader" style="display:none">
+            <span id="dot" class="dot"></span>
+            <div id="dots" class="dots">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+
+
         <span class="textInformation"> Aby się zarejestrować wypełnij pola poniżej</span>
 
         <input class="inputType" id ="Name" type="text" placeholder="Wprowadź swoje Imię"><br><br>

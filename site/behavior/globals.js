@@ -5,6 +5,16 @@
 * */
 
 (function(globals){
+
+    globals.loadingOn = function(req, res){
+         document.getElementById("loader").style.display = "block"
+    }
+
+    globals.loadingOff = function(){
+        document.getElementById("loader").style.display = "none";
+    }
+
+
     globals.ImplementServices = function(){
 
             HttpRequestJson('/implement').then(function(data){

@@ -38,7 +38,7 @@ app.use(bodyParser.json({ limit: '128mb'}));
         app.get("/configuration",function(req, res){res.sendFile(configFile+"/admin/pages/configuration.html")})
         app.get("/log-out",function(req, res){res.send("logout panel")})
 
-        app.post("/addUser", require(configFile+'/configuration/database').addUser);
+       // app.post("/addUser", require(configFile+'/configuration/database').addUser);
 
         app.get("/register", function(req, res){res.sendFile(configFile+"/site/pages/register.html")})
 

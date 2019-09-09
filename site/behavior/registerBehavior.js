@@ -3,7 +3,8 @@
 var uiModel ={
     information: '',
     send: function(){
-
+        loadingOn();
+        debugger;
         var name = document.getElementById("Name").value;
         var surname = document.getElementById("Surname").value;
         var nick = document.getElementById("Nick").value;
@@ -14,6 +15,7 @@ var uiModel ={
         var at = email.indexOf('@')
         if (password !== replyPassword || at == -1 ){
             uiModel.information = "Hasła nie są takie same... lub email jest zły";
+            loadingOff();
         }else {
             uiModel.information = '';
 
@@ -32,6 +34,8 @@ var uiModel ={
     }
 }
 
+
+
 function registerNewUser(registerPack){
     var createUser = new Promise(function(resolve, reject){
          return HttpRequestJson("/createNewUser",registerPack).then(function(info){
@@ -42,7 +46,7 @@ function registerNewUser(registerPack){
 
     return createUser.then(data => {
         console.log(data)
-
+       setTimeout(function(){loadingOff()},1000);
     });
 }
 
