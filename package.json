@@ -23,6 +23,7 @@
     "request": "^2.88.0",
     "rivets": "^0.9.6",
     "sha256": "^0.2.0",
+    "uniqid": "^5.0.3",
     "window": "^4.2.6"
   },
   "devDependencies": {},

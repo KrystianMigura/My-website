@@ -28,7 +28,25 @@ var uiModel ={
                 "password": password
             }
 
-            return registerNewUser(registerPack)
+            var checkExistUser = new Promise(function(resolve, reject){
+                return HttpRequestJson("/checkUser",registerPack).then(function(info){
+                    resolve(info)
+                })
+
+            })
+
+            return checkExistUser.then(function(information) {
+                debugger;
+                if(information == true || information == "true"){
+                    uiModel.information = "Podany użytkownik już istnieje w bazie..."
+                    loadingOff();
+                }
+
+                if(information == false || information == "false"){
+                    return registerNewUser(registerPack);
+
+                }
+            })
 
         }
     }

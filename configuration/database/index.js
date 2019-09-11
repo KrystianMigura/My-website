@@ -2,6 +2,8 @@
 var MongoClient = require('mongodb').MongoClient;
 var config = require('../config.json');
 var sha256 = require('sha256');
+var uniqid = require('uniqid');
+var path = require('path')
 
 var db;
 const auth = require('./index.js')
@@ -41,11 +43,63 @@ module.exports.authToMongoDb= function (req, res) {
     return db
 }
 
+module.exports.ALL = function(req, res){
+var parametr = req.url.split("/")
+var userName = parametr[2];
+var nick = parametr[3];
+    var con = new Promise(function(resolve, reject){
+        var dat = auth.authToMongoDb();
+        resolve(dat);
+    });
 
+    return con.then(data =>{
+
+        var newDataBase = data.db("UsersWaitingForAccept");
+        newDataBase.collection("waitingUsers").find({"name":userName, "nick":nick}).toArray(function(err, result) {
+            if (err) throw err;
+
+
+            if(result.length > 0){
+                res.send("<p>OKEYYY</p>") //require page for next authorization
+            }else{
+                res.send("<h1>tu wartosc okna kiedy nie ma w bazie usera!!!</h1>")
+            }
+            //res.send(result)
+        });
+    })
+}
+
+module.exports.checkUser = function(req, res){
+    var con = new Promise(function(resolve, reject){
+        var dat = auth.authToMongoDb();
+        resolve(dat);
+    });
+
+    return con.then(data =>{
+
+
+    var email = req.body.email;
+
+    var valToSend = true;
+    var newDataBase = data.db("UsersWaitingForAccept");
+
+        newDataBase.collection("waitingUsers").find({"email": email}).toArray(function(err, result) {
+            if (err) throw err;
+
+            if(result.length == 0){
+                valToSend = false;
+            }
+
+            if(result.length >0){
+                valToSend = true;
+            }
+        })
+
+        setTimeout(function(){res.send(valToSend)},500);
+    });
+}
 
 module.exports.createNewUser = function(req, callback){
-
-
 
     var con = new Promise(function(resolve, reject){
         var dat = auth.authToMongoDb();
@@ -53,8 +107,6 @@ module.exports.createNewUser = function(req, callback){
     });
 
     return con.then(data => {
-
-
         var userInformation = {
             "name": req.body.name,
             "surname": req.body.surname,
@@ -63,7 +115,8 @@ module.exports.createNewUser = function(req, callback){
             "password": sha256(req.body.password),
             "status": 'null',
             "authorization": 'null',
-            "adminAccess": false
+            "adminAccess": false,
+            "uniqueId": uniqid()
         }
         var newDataBase = data.db("UsersWaitingForAccept")
         newDataBase.collection("waitingUsers").insertOne(userInformation, function(err, res){
@@ -73,17 +126,10 @@ module.exports.createNewUser = function(req, callback){
         });
 
         var answer = {
-            "message": "ok",
+            "message": "User added to temporary array",
             "body": req.body
         }
         callback.send(answer)
 
     })
-
-
-
-
-
-
-
 }

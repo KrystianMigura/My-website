@@ -2,12 +2,16 @@ path = require('path')
 var bodyParser = require('body-parser')
 var configFile = path.join(__dirname,'../');
 var file = require("./../ServicesPath.json")
+
+
 module.exports.registerRoutes = function(app){
     routes(app);
 }
 
 
 function routes(app){
+
+
 app.use(bodyParser.json({ limit: '128mb'}));
 //all routes here
 
@@ -44,7 +48,9 @@ app.use(bodyParser.json({ limit: '128mb'}));
 
 
         app.post("/createNewUser", require(configFile+'/configuration/database').createNewUser);
+        app.post("/checkUser", require(configFile+'/configuration/database').checkUser)
 
+        app.all("/register/:userName/:nick",require(configFile+'/configuration/database').ALL)
         //error
 
         //style
