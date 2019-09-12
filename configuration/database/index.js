@@ -65,6 +65,7 @@ module.exports.ALL = function(req, res){
         newDataBase.collection("waitingUsers").find({"name":userName, "nick":nick}).toArray(function(err, result) {
             if (err) throw err;
 
+            if(result.length > 0)
             if(result[0].uniqueId == uniqueId){
                 var newDataBase = data.db("UsersWaitingForAccept");
                 newDataBase.collection("waitingUsers").deleteOne({"_id":result[0]._id});
@@ -76,14 +77,20 @@ module.exports.ALL = function(req, res){
                 newDataBase.collection("Users").insertOne(userValue, function(err, res){
                     if(err) throw err;
 
-                    console.log("user Added")
+
                 });
+                setTimeout(function(){res.redirect('/')},3000);
 
-
-            }else{
-                res.send("Coś poszlo nie tak")
             }
+
+            if(result.length == 0){
+                res.redirect("/404")
+            }
+
+
+
         });
+
     })
 }
 
