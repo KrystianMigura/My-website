@@ -38,7 +38,9 @@ app.use(function(req, res, next) {
 app.use(function(req, res, next) {
     req.setHeader("Content-Type", "application/json;");
     res.setHeader("Content-Type", "text/html");
+    res.setHeader("Content-Type", "text/plain");
     res.setHeader("Access-Control-Allow-Origin", "*");
+    res.setHeader('Content-Type', 'application/x-www-form-urlencoded');
     res.setHeader(
         "Access-Control-Allow-Headers",
         "Origin, X-Requested-With, Content-Type, Accept"

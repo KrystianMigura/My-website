@@ -50,7 +50,7 @@ app.use(bodyParser.json({ limit: '128mb'}));
         app.post("/createNewUser", require(configFile+'/configuration/database').createNewUser);
         app.post("/checkUser", require(configFile+'/configuration/database').checkUser)
 
-        app.all("/register/:userName/:nick",require(configFile+'/configuration/database').ALL)
+        app.all("/register&data=:userName&:nick&:uniqueId",require(configFile+'/configuration/database').ALL)
         //error
 
         //style

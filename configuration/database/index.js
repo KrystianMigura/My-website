@@ -4,6 +4,7 @@ var config = require('../config.json');
 var sha256 = require('sha256');
 var uniqid = require('uniqid');
 var path = require('path')
+var configFile = path.join(__dirname,'../../');
 
 var db;
 const auth = require('./index.js')
@@ -44,9 +45,15 @@ module.exports.authToMongoDb= function (req, res) {
 }
 
 module.exports.ALL = function(req, res){
-var parametr = req.url.split("/")
-var userName = parametr[2];
-var nick = parametr[3];
+
+    console.log(req.url)
+    var parametr = req.url.split("=")
+    var value = parametr[1];
+    value = value.split("&")
+    var userName = value[0];
+    var nick = value[1];
+    var uniqueId = value[2];
+
     var con = new Promise(function(resolve, reject){
         var dat = auth.authToMongoDb();
         resolve(dat);
@@ -58,13 +65,24 @@ var nick = parametr[3];
         newDataBase.collection("waitingUsers").find({"name":userName, "nick":nick}).toArray(function(err, result) {
             if (err) throw err;
 
+            if(result[0].uniqueId == uniqueId){
+                var newDataBase = data.db("UsersWaitingForAccept");
+                newDataBase.collection("waitingUsers").deleteOne({"_id":result[0]._id});
 
-            if(result.length > 0){
-                res.send("<p>OKEYYY</p>") //require page for next authorization
+                var newDataBase = data.db("AcceptedUsers")
+                var userValue = result[0];
+                userValue.authorization = "true";
+                userValue.status = "free"
+                newDataBase.collection("Users").insertOne(userValue, function(err, res){
+                    if(err) throw err;
+
+                    console.log("user Added")
+                });
+
+
             }else{
-                res.send("<h1>tu wartosc okna kiedy nie ma w bazie usera!!!</h1>")
+                res.send("Coś poszlo nie tak")
             }
-            //res.send(result)
         });
     })
 }
