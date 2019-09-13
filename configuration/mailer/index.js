@@ -15,7 +15,7 @@ var account = new Promise(function(resolve, reject){
         port: 587,
         secure: false,
         auth: {
-            user: credentials.gmail.user, 
+            user: credentials.gmail.user,
             pass: credentials.gmail.pass
         },
         tls: {
