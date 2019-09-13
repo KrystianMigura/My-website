@@ -64,6 +64,13 @@ function registerNewUser(registerPack){
 
     return createUser.then(data => {
         console.log(data)
+        $("#Name").val('');
+        $("#Surname").val('');
+        $("#Nick").val('');
+        $("#Email").val('');
+        $("#password").val('');
+        $("#password1").val('');
+        uiModel.information = "Na twój adres Email został wysłany link z potwierdzeniem autoryzacjii..."
        setTimeout(function(){loadingOff()},1000);
     });
 }
