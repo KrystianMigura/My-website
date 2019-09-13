@@ -5,7 +5,7 @@ var sha256 = require('sha256');
 var uniqid = require('uniqid');
 var path = require('path')
 var configFile = path.join(__dirname,'../../');
-
+var mailer = require("../mailer")
 var db;
 const auth = require('./index.js')
 
@@ -147,6 +147,17 @@ module.exports.createNewUser = function(req, callback){
         newDataBase.collection("waitingUsers").insertOne(userInformation, function(err, res){
             if(err) throw err;
 
+            var email = new Promise(function(resolve, reject){
+                console.log('emailPromise')
+                return mailer.authorization(userInformation)
+
+            })
+
+            return email.then(information =>{
+
+
+            })
+            //nodemailer send email + link for authorization
             console.log("user Added")
         });
 
