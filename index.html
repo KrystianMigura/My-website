@@ -5,8 +5,14 @@
 <div id="allPages" class="allPages">
 
     <div class="topMenu">
-        <span class="login">Login</span>
+        <span class="login" rv-on-click="login">Login</span>
         <span class="register" rv-on-click="register">Register</span>
+
+    </div>
+    <div class = "loginPopUp" id="login">
+        <input type="text"><br>
+        <input type="password"><br>
+        <button rv-on-click="logIn"> Login</button>
 
     </div>
 
@@ -22,12 +28,17 @@
     </div>
 
     <div class="body">
-        asdfasdfasdf
-        <span>Podaj imie: </span><input id ="Name" type="text"><br>
-        <span>Podaj nazwisko: </span><input id ="Surname" type="text"><br>
-        <span>Podaj nick: </span><input id="Nick" type="text"><br>
-        <span>Podaj email: </span><input id="Email" type="text"><br>
-        <button rv-on-click="Send">Wyślij</button>
+        <div id="loader" class="loader" style="display:none">
+            <span id="dot" class="dot"></span>
+            <div id="dots" class="dots">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+
+
+
     </div>
     <div class="tootsy">All Right Reserved by Krystian Migura 2019</div>
 

@@ -5,6 +5,12 @@
 * */
 
 (function(globals){
+    globals.login = function(req, res){
+
+        HttpRequestJson('/logIn', obj).then(function(callback){
+            //try create session for login user
+        })
+    }
 
     globals.loadingOn = function(req, res){
          document.getElementById("loader").style.display = "block"

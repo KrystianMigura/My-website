@@ -6,10 +6,18 @@
 
 
     <div class="topMenu">
-        <span class="login">Login</span>
+        <span class="login" rv-on-click="login">Login</span>
         <span class="register" rv-on-click="register">Register</span>
 
     </div>
+
+    <div class = "loginPopUp" id="login">
+        <input type="text"><br>
+        <input type="password"><br>
+        <button rv-on-click="logIn"> Login</button>
+
+    </div>
+
 
     <div class="leftMenu">
 
